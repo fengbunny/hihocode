@@ -4,7 +4,6 @@ using namespace std;
 
 long merge(vector<int>& nums, int low, int mid, int high)
 {
-	cout << low << " " << high << endl;
 	vector<int> tmp;
 	int i = low, j = mid + 1;
 	long count = 0;
@@ -13,7 +12,7 @@ long merge(vector<int>& nums, int low, int mid, int high)
 	{
 		if(nums[j] < nums[i])
 		{
-			count += j - i;
+			count += mid + 1 - i;
 			tmp.push_back(nums[j++]);
 		}
 		else
@@ -31,7 +30,6 @@ long merge(vector<int>& nums, int low, int mid, int high)
 	for(i = low; i <=high; i++)
 		nums[i] = tmp[i - low];
 
-	cout << count << endl;
 	return count;
 }
 long merge_sort(vector<int>& nums, int low, int high)
@@ -39,6 +37,7 @@ long merge_sort(vector<int>& nums, int low, int high)
 	if(high - low < 1) return 0;
 
 	int mid = (low + high) >> 1;
+
 	return (merge_sort(nums, low, mid) 
 		+ merge_sort(nums, mid + 1, high) 
 		+ merge(nums, low, mid, high));
