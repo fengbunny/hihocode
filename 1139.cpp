@@ -21,17 +21,11 @@ bool bfs(vector<vector<pair<int, int> > >& edges, int w_bound, int k_bound, int 
 
 	while(!q.empty())
 	{
-		// cout << "yes " << endl;
 		int u = q.front();
 		q.pop();
 
 		if(u == t)
 			return visited[u] <= k_bound;
-
-		// for(auto p : edges[u])
-		// {
-		// 	cout << p.first << p.second << " ";
-		// }
 
 		for(auto p : edges[u])
 		{
@@ -39,7 +33,6 @@ bool bfs(vector<vector<pair<int, int> > >& edges, int w_bound, int k_bound, int 
 			{
 				visited[p.first] = visited[u] + 1;
 				q.push(p.first);
-				// cout << p.first << visited[p.first] << endl;
 			}
 		}
 	}
@@ -53,21 +46,18 @@ int main()
 	cin >> N >> M >> K >> T;
 
 	vector<vector<pair<int, int> > > edges(N+1);
-	// set<int> weights;
 
 	int u, v, w;
 	while(cin >> u && cin >> v && cin >> w)
 	{
 		edges[u].push_back(make_pair(v, w));
 		edges[v].push_back(make_pair(u, w));
-		// weights.push_back(w);
 	}
 
 	int low = 1, high = 1000000;
 	bool flag =false;
 	while(low < high)
 	{
-		// cout << low << " " << high << endl;
  		int mid = (low + high) >> 1;
 		if(bfs(edges, mid, K, 1, T))
 		{
